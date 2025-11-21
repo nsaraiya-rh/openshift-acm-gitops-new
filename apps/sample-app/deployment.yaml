@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-app
+  namespace: sample-app
+  labels:
+    app: sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+        - name: sample-app
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+        - name: oauth2-proxy
+          image: quay.io/oauth2-proxy/oauth2-proxy:latest
+          args:
+            - --provider=keycloak-oidc
+            - --client-id=sample-app
+            - --client-secret=REPLACE_WITH_SECRET
+            - --oidc-issuer-url=https://keycloak.example.com/realms/sample-realm
+            - --email-domain=*
+            - --upstream=http://localhost:80
+            - --http-address=0.0.0.0:4180
+          ports:
+            - containerPort: 4180
+              name: oauth-proxy

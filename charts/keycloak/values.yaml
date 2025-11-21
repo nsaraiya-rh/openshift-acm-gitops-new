@@ -1,0 +1,12 @@
+keycloak:
+  name: keycloak
+  namespace: keycloak
+  instances: 1
+  adminUser: admin
+  adminPassword: password
+  hostname: keycloak.example.com
+operator:
+  enabled: true
+  channel: stable-v24
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace

@@ -1,0 +1,19 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: KeycloakClient
+metadata:
+  name: {{ .Values.keycloak.name }}-client
+  namespace: {{ .Values.keycloak.namespace }}
+spec:
+  realmSelector:
+    matchLabels:
+      app: {{ .Values.keycloak.name }}
+  client:
+    clientId: sample-app
+    enabled: true
+    publicClient: false
+    standardFlowEnabled: true
+    directAccessGrantsEnabled: true
+    redirectUris:
+      - "https://sample-app.example.com/*"
+    webOrigins:
+      - "+"

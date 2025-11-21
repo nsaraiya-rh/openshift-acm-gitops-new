@@ -1,0 +1,13 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: KeycloakRealm
+metadata:
+  name: {{ .Values.keycloak.name }}-realm
+  namespace: {{ .Values.keycloak.namespace }}
+spec:
+  realm:
+    realm: sample-realm
+    enabled: true
+    displayName: Sample Realm
+  instanceSelector:
+    matchLabels:
+      app: {{ .Values.keycloak.name }}
