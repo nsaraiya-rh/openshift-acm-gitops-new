@@ -3,6 +3,8 @@ kind: Keycloak
 metadata:
   name: {{ .Values.keycloak.name }}
   namespace: {{ .Values.keycloak.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   instances: {{ .Values.keycloak.instances }}
   hostname:

@@ -3,6 +3,8 @@ kind: KeycloakRealm
 metadata:
   name: {{ .Values.keycloak.name }}-realm
   namespace: {{ .Values.keycloak.namespace }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   realm:
     realm: sample-realm
